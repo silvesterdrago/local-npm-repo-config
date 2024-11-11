@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  verdaccio:
+    image: verdaccio/verdaccio
+    container_name: my-verdaccio
+    ports:
+      - "4873:4873"  # Map TCP port 4873 in the container to port 4873 on the Docker host.
+    volumes:
+      - "./storage:/verdaccio/storage"  # Persistent storage for packages
+      - "./config:/verdaccio/conf"       # Configuration files
+      - "./plugins:/verdaccio/plugins"   # Plugins directory
+    restart: always  # Ensures Verdaccio restarts automatically if it crashes or if the server reboots
+
+# Volumes are defined outside of the service to ensure data persistence.
+# volumes:
+#   storage:
+#   config:
+#   plugins:
